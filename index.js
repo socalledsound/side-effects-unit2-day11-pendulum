@@ -22,8 +22,8 @@ function draw(){
     background(255);
     // calculate a new x value using the function below
     x = calcX();
-    //keep y the same
-    y = 500;
+    //this time we'll also do a calc on y
+    y = calcY();
     //draw a circle at x and y coordinates with a size of ballR
     ellipse(x, y, ballR);
     //increment this value, theta, every time through the loop
@@ -34,3 +34,5 @@ function draw(){
 //Math.sin of theta will always be between -1 and 1
 //this will keep our ball on the screen.
 const calcX = () => Math.sin(theta) * scale + offset;
+//similar to our calc x but we cal y with the cosine function
+const calcY = () => Math.cos(theta) * scale + offset;
