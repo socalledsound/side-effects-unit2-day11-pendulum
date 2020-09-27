@@ -1,5 +1,5 @@
 class Pendulum {
-    constructor(originX, frequency, ballRadius, gravity){
+    constructor(originX, frequency, ballRadius, gravity, index){
         this.originX = originX;
         this.originY = 0;
         this.ballX = originX + frequency;
@@ -13,8 +13,10 @@ class Pendulum {
         this.damping = 0.999;
         this.strokeColor = [140,40,140];
         this.strokeWeight = 6;
-        this.fillColor = [200,60,120]
-        console.log(this.angle)
+        this.fillColor = [200,60,120];
+        this.sound = null;
+        this.ampMultiplier = index/10;
+        // console.log(this.angle);
     }
 
     updateAngle(){
@@ -31,13 +33,22 @@ class Pendulum {
         this.ballY = Math.cos(this.angle) * this.frequency; 
     }
 
+
+    updateSound(){
+        // console.log(this.sound);
+        this.amp = Math.abs(Math.sin(Math.pow(4, this.angle)));
+         console.log(this.amp);
+        this.sound.amp(this.amp * 0.1 * this.ampMultiplier);
+    }
+
     update(){
         this.updateAngle();
         this.updatePosition();
+        this.updateSound();
     }
 
     display(){
-        console.log(this.ballX, this.ballY);
+        // console.log(this.ballX, this.ballY);
         stroke(this.strokeColor);
         strokeWeight(this.strokeWeight);
         fill(this.fillColor);
