@@ -16,6 +16,7 @@ class Pendulum {
         this.fillColor = [200,60,120];
         this.sound = null;
         this.ampMultiplier = index/10;
+        this.lfo = null;
         // console.log(this.angle);
     }
 
@@ -39,6 +40,7 @@ class Pendulum {
         this.amp = Math.abs(Math.sin(Math.pow(4, this.angle)));
          console.log(this.amp);
         this.sound.amp(this.amp * 0.1 * this.ampMultiplier);
+        this.sound.freq(this.lfo);
     }
 
     update(){
