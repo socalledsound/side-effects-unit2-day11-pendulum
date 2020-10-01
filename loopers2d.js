@@ -63,19 +63,31 @@ function Looper(bigX, bigY, angle, h){
   this.b = 0.5-cos(this.h*23.0) * 255;
   
     
+
+  this.update = () => {
+    this.updateColor();
+    this.updatePosition();
+  }
+
+  this.updateColor = () => {
+    this.r = 0.5 - cos(this.h*17.0) * 255;
+    this.g = 0.5- cos(this.h*13.0) * 255;
+    this.b = 0.5-cos(this.h*23.0) * 255;
+  }
+
+  this.updatePosition = () => {
+    let x = cos(this.angle * TWO_PI) * r;
+    let y = sin(this.angle * TWO_PI) * r;
+
+    this.angle+=0.01;
+    this.h+=0.005;
+  this.waveAngle+=0.01;
+  }
+
   
-  this.display = function(){
-      this.r = 0.5 - cos(this.h*17.0) * 255;
-  this.g = 0.5- cos(this.h*13.0) * 255;
-  this.b = 0.5-cos(this.h*23.0) * 255;
-    
-    
-      let x = cos(this.angle * TWO_PI) * r;
-      let y = sin(this.angle * TWO_PI) * r;
-      
-    
-          noFill();
-      //noStroke()
+  this.display = () => {
+
+
     stroke(250, 50);
       ellipse(this.bigX, this.bigY, r*5);
     
@@ -83,13 +95,6 @@ function Looper(bigX, bigY, angle, h){
      // fill(this.hue, 220,190,50);
       fill(this.r, this.g, this.b);
       ellipse(this.bigX + x, this.bigY + y, r/2);
-
-
-
-     this.angle+=0.01;
-      this.h+=0.005;
-    this.waveAngle+=0.01;
-      
     
   } 
 }

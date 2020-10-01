@@ -19,21 +19,23 @@ function setup(){
 pendulums.forEach((pendulum, i) => {
 
 
+  //here the new keyword is making a new Oscillator object of type 'sine' -- check p5.sound reference for more info
   const sound = new p5.Oscillator('sine');
-//   sound.amp(0.8);
-//   sound.freq(reversePendulums[i].frequency * 1.5);
-//   sound.freq(600);
+  //start the sound
   sound.start();
- 
-
+  //make another new oscillator to use as an lfo, also of type sine
   const lfo = new p5.Oscillator('sine');
+  //set the amplitude of the lfor from the array of values above -- notice the amplitude is really big
   lfo.amp(lfos[i]);
+  //set the freqency from the lengths of the penudulm strings, but in reverse
   lfo.freq(reversePendulums[i].frequency * 1.4);
+  //start the lfo but disconnect its output
   lfo.start();
   lfo.disconnect();
+  //set the frequence of the sound to whatever the current frequency of the lfo is
   sound.freq(lfo);
 
-
+  //assign this sound (and its lfo to a property on the current pendulum), which we can then use inside the pedulum object!
   pendulums[i].sound = sound;
   pendulums[i].lfo = lfo;
 
@@ -43,7 +45,9 @@ pendulums.forEach((pendulum, i) => {
 
 }
 
+//notice how small and easy to read out draw loop is.  should we rewrite our setup function to be cleaner?  probably.  can you?
 function draw(){
+  //redraw the background
     background(220, 220, 250);
 
     //update and display the array of pendulums
